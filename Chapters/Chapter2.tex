@@ -1,0 +1,169 @@
+% Chapter Template
+
+\chapter{Objetivos y criterios de la metodología usada} % Main chapter title
+
+\label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Capítulo 2. \emph{Objetivos y criterios de la metodología usada}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Objetivos}
+
+Se requiere desarrollar un sistema que permita monitorizar alarmas a través de Internet.
+
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+
+\section{Limitaciones}
+
+A continuación, se explicitan las limitaciones del sistema a desarrollar, impuestas por el director del proyecto:
+\begin{itemize}
+\item Sensores a monitorizar de tipo ON-OFF.
+\item Máximo 8 sensores por alarma.
+\item Conexiones simultáneas limitadas a monitorizar.
+\item Envío de alertas por red sin encriptación.
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+\clearpage
+
+\section{Criterios de la Metodología de diseño de Hardware}
+
+En la siguiente sección se presentan y analizan las distintas opciones de \textit{hardware} disponibles en el mercado para el desarrollo del sistema. Éste se divide en 3 subsistemas y se presentan de manera separada.
+\clearpage
+
+\subsection{Subsistema Alarma}
+
+En este caso existen varias alternativas, que se presentan a continuación:
+
+\begin{table}[ht]
+  	\begin{center}
+  	\hspace*{-2cm}
+	  \begin{tabular}{|l|l|l|l|l|}
+		\hline      
+        Marca				& Placa de desarrollo & Características		& Ventajas		& Desventajas				\\
+		\hline \hline
+    	PIC					&16F877A			& Arq:RISC					&+Bajo costo	&-Tecnología antigua		\\
+    						&					& Bus 8 bits				&+Soporte		&-Sin conectividad	 		\\
+    						&					& Frec:20 MHz 				&+Bajo consumo	&de red propia				\\
+    						&					& RAM:368 B 				&				&-Baja \textit{Performance}	\\
+							&					& 8KB Flash 				&				&-No SO						\\
+							&					& 256 B EEPROM 				&				& Programador externo	 	\\		
+    						&					& I2C,SPI,USART				&				&		\\ 
+    						&					& ADC 10 bits(6)			&				&		\\    					
+    \hline
+    ATmel					&Arduino UNO		& Arq:RISC					&+Soporte		&-Recursos limitados		\\
+    						&(ATmega 328)		& Bus 8 bits				&+Software		&-Conectividad de red	 		\\
+    						&					& Frec:16 MHz 				&+\textit{Hardware} 		&-Baja \textit{Performance}	 	\\
+    						&					& RAM: 1KB 					&complementario				&-No SO							\\
+							&					& 8KB Flash 				&+Bajo consumo				&							\\
+							&					& 512 B EPROM 				&				&		\\
+    						&					& I2C,SPI,USART				&				&		\\ 
+    						&					& ADC 10 bits(5)			&				&		\\    		
+    \hline
+    ARM 					&K64F				& Arq:RISC					&+Alta \textit{Performance}		&-Relativo alto		\\
+    						&(Cortex M4)		& Bus: 32 bits	 			&+Múltiples \textit{RTOSs}		& consumo		 	\\
+    						&					& Frec:120 Mhz 				&+Ethernet						&-Alto costo		\\
+    						&					& RAM: 256KB 				&+\textit{Debug in}				&					\\
+							&					& Flash: 1 MB  				& \textit{circuit}				&					\\
+							&					& 512 B EEPROM 				&				&			\\
+    						&					& Ethernet					&				&		\\
+    						&					& SDHC						&				&		\\
+    					    &					& USB con OTG				&				&		\\
+    						&					& I2C,SPI,USART				&				&		\\ 
+    						&					& PWM						&				&		\\
+    \hline
+   Intel-x86  				&Intel Galileo 		& Arq:CISC					&+Alta \textit{Performance}		&-Alto consumo		\\
+       						&(2da Gen)			& Bus: 32 bits				&+Software						&-Conectividad de red	 		\\
+    						&					& Frec: 400 MHz				&+Múltiples \textit{RTOSs}		&-Alto costo	 	\\
+    						&					& RAM: 256 MB				&+Ethernet						&-Disponibilidad		\\
+							&					& Flash: 8 Mb 				&				&		\\
+							&					& EEPROM: 8 Kb 				&				&		\\
+    						&					& Ethernet			&				&		\\
+    						&					& SDHC				&				&		\\
+    					    &					& USB con OTG		&				&		\\
+    						&					& I2C,SPI,USART		&				&		\\ 
+    						&					& PWM				&				&		\\
+    \hline
+    
+  \end{tabular}
+  \hspace*{-2cm}
+	\caption{Tabla de Arquitecturas de Hardware.}
+	\label{Tabla de Arquitecturas de Hardware.}
+	\end{center}
+\end{table}
+\clearpage
+
+Se decide por la utilización de la Arquitectura \textit{ARM}, en particular, del microcontrolador de la serie \textit{Cortex}, familia M4, con la placa de desarrollo \textit{Freescale} K64F.\cite{embedded2} \\
+La misma ofrece prestaciones superiores a las demás en \textit{performance}, como en periféricos necesarios para el desarrollo tales como interfaz \textit{Ethernet},\textit{ Debug in Circuit} y la posibilidad de utilizar Sistemas Operativos de tiempo real.\\
+
+
+
+\subsection{Subsistema Servidor}
+
+Se opta por utilizar un servidor con arquitectura x86, ya que es la más difundida.
+
+\subsection{Subsistema Aplicación}
+Debido al requerimiento de la aplicación para \textit{smartphone}, en un principio sobre SO \textit{Android}, el cual corre casi en la totalidad de equipos con arquitectura \textit{ARM}, se elige esta arquitectura.
+
+\newpage
+\section{Criterios de la Metodología de Desarrollo de Software}
+Se detalla en un principio la metodología de desarrollo y el modelado para el sistema general y posteriormente el lenguaje de programación elegido en cada caso.\citep{softIng2Book},\cite{softIng3Book},\cite{softIng5Book}\\
+Por último, se describen los SOs utilizados en cada caso.\\
+
+	\subsection{Modelo y Metodología de desarrollo} 
+Existen distintos tipos de modelos y de metodologías de desarrollos de software, los cuales se plantean en las tablas \ref{Tabla de Modelos de desarrollo de Software.} y \ref{Tabla de Metodologias de desarrollo de Software.} correspondientemente, explicitando sus características y ventajas/desventajas con respecto a este proyecto:\\
+
+\begin{table}[ht]
+  	\begin{center}
+  	\hspace*{-3cm}
+	  \begin{tabular}{|l|l|l|l|}
+		\hline      
+        Modelo			& Características										& Ventajas						& Desventajas			\\
+		\hline \hline
+    	Cascada			& -Primer modelo y base de todos los demás.			&+Fácil de implementar. 		&-Inflexible.			\\			
+    					& -Orden riguroso de las etapas.						&+Modelo conocido y   			&-Lento.					\\	
+    					&														&utilizado con frecuencia.		&-Impredecible.			\\
+    					& 														&+Orientado a documentos.  		&							\\			
+    	\hline
+    	Espiral			& -Las actividades se conforman en una  				&+El análisis del riesgo se 	&-Lento				\\
+    					& espiral, en la que cada iteración 					&hace de forma explícita. 		&-Costoso				\\
+    					& representa un conjunto de actividades.				&+Objetivos de calidad			&-Requiere experiencia\\
+    					& -Se basa en el riesgo que aparece a 					&+Integra el desarrollo 		& en identificación	\\    
+    					& la hora de desarrollar software.						&con el mantenimiento			& de riesgos.						\\	
+    	\hline
+    	Tipo V			& -Representa la secuencia de desarrollo 				&+Minimización de los  			&-Inflexible.			\\ 
+    					&  del ciclo de vida de un proyecto.					&riesgos del proyecto.			&							\\ 
+    					& -Se describen las actividades y resultados 			&+Garantiza la Calidad.			&							\\ 
+    					& que deben producirse durante el desarrollo.			&+El esfuerzo para el 			&							\\	
+    					& -El lado izquierdo de la V representa la 			&puede ser	calculado,			&							\\	
+    					& descomposición de las necesidades, y la  			&estimado y controlado.  		&							\\	
+    					& creación de las especificaciones del sistema. 		&								&							\\	
+    					& -El lado derecho de la V representa la 				&  								&							\\	
+    					& integración de las piezas y su verificación. 		&  								&						\\	
+    					& -V significa Verificación y validación.				&  								&					\\	
+    	\hline
+    	Iterativo		& -Creado en respuesta a las debilidades del			&+Los usuarios pueden utilizar &-Requiere de un	\\
+    	e				&modelo tradicional de cascada. 						&los incrementos iniciales		&cliente involucrado  	\\	
+    	Incremental		& -Conjunto de tareas agrupadas en pequeñas  			&como prototipos.  				&durante todo \\	
+    					&etapas repetitivas (iteraciones).						&+Pocas probabilidades de 		&el proyecto.			\\
+						& -En cada iteración los componentes logran 			&riesgo en el sistema.			&Iteraciones costosas    	\\
+  						&evolucionar el producto dependiendo de los			&+Permite separar la			&    	\\    
+    					& completados de las iteraciones antecesoras,			&complejidad del proyecto.		&    	\\
+    					& agregando más opciones de requisitos.  				&+con los usuarios.				&    	\\
+    	\hline
+    	\end{tabular}
+  		\hspace*{-4cm}
+	\caption{Tabla de Modelos de desarrollo de Software.}
+	\label{Tabla de Modelos de desarrollo de Software.}
+	\end{center}
+\end{table}
+
+\newpage
+
