@@ -6,10 +6,28 @@
 
 \lhead{Capítulo 1. \emph{Introducción}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
+\section{Motivación y Objetivos}
+Como primera parte de la práctica profesional se propuso el estudio y el análisis de arquitecturas y patrones de diseño empleados en el desarrollo de sistemas de software orientados a multiplataformas (o sistemas operativos) y con una fuerte influencia de frameworks de desarrollo.
+Con esta tarea en mente se procedió a cumplir con las siguientes metas:
 
-\section{Introducción}
+\begin{itemize}
+	\item Entnender el concepto de patron de arquitectura de software
+	\item Entender el concepto de patrones de diseño de software.
+	\item Investigar las arquitecturas más comunmente usadas en el desarrollo de aplicaciones nativas para dispositivos móviles.
+	\item Entender los detalles de las opciones y tomar en consideración las dificultades más importantes de cada alternativa.
+	\item Elegir una opción y justificar tal elección
+	\item Introducir una posible alterativa de implementación de tal arquitectura y la correspondiente descripción de componentes.
+	 
+\end{itemize}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer congue magna eu tortor hendrerit commodo. Integer consectetur, ante ut venenatis volutpat, turpis diam venenatis massa, id tincidunt ligula velit porta quam. Mauris vel auctor lorem. Vestibulum nisl lorem, ultricies a commodo at, semper quis erat. Aenean pharetra felis lectus, id blandit mauris congue non. Vestibulum efficitur sagittis dui, ut feugiat elit pretium sed. Donec viverra, lacus sed dictum pellentesque, lectus mauris ultricies arcu, vel vestibulum velit erat vitae elit. Phasellus quis aliquam neque. Nunc placerat molestie dui id sollicitudin. Duis odio mi, rhoncus eget lobortis nec, ornare at leo.
+En una segunda parte se analizará una implementación real del diseño expuesto.
+
+\section{Sobre los patrones en la etapa de diseño}
+El empleo de patrones de arquitectura así como patrones de diseño en el proceso de desarrollo de software permite estandarizar la abstracción del problema y modularizar la solución en componentes conocidos y de responsabilidad limitada. Definir una cantidad y variedad limitada de componentes favorece la reutilización de estructuras y tanto la implementación de nuevas funcionalidades así como la corrección de errores implica una ordenada cantidad de tareas que facilitan al mismo tiempo su apropiada planificación.
+Tanto la manipulación de datos como la interacción con sistemas vecinos puede incorporarse como partes del diseño contemplado siempre y cuando se respete el esquema de responsabilidades y las políticas de dependencias.
+Por lo general la utilización de patrones en la etapa de diseño ayuda a definir con precisión la distribución de responsabilidades entre distintas clases, incrementa la cohesión entre objetos, el encapsulamiento y la definición de contratos mediante la abstracción de interfaces.
+Adicionalmente la inclusión de diseño como la inversión de control deberían facilitar en gran medida el planteo, la implementación y la ejecución de pruebas unitarias, funcionales y de interfaz de usuario.
+
 
 
 
@@ -17,29 +35,43 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer congue magna eu
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Lorem Ipsum}
+\section{Porqué invertir en una arquitectura sólida}
+Una de las más comunes e incorrectas prácticas en el desarrollo de software es optar por utilizar un enfoque NAIVE (ingénuo) que permite ciertamente conseguir prototipos más veloces ya que subestima el esfuerzo de la etapa de diseño al inicio del proyecto. Sin embargo este tipo de prácticas, tarde o temprano terminará mostrando síntomas de su ejecición tales como demasiados objetos omnipotentes y omnipresentes (god objects) que resultan sumamente inflexibles, al mismo tiempo el arbol de dependencias presenta un nivel de complejidad tal que hace al proyecto propenso a errores ante el más mínimo refactoreo. En fin, a pesar de la efectividad del enfoque en conseguir resultados al corto plazo, en algún momento se convertirá en un caos total y la adición de nueva funcionalidad será muy difícil requiriendo de una necesaria una refactorización importante. Por lo antes expuesto nunca debe subestimarse la complejidad de una aplicación, sobre todo cuando la etapa de especificación fue realizada con poca rigurosidad.
+En ocaciones es bastante fácil comenzar rápidamente a hackear una aplicación preexistente, pero este enfoque no escala con facilidad. La opción que suele no funcionar bien para proyectos duraderos es aquel donde primero se construye un producto mínimo viable y, a continuación, se agrega incrementalmente una gran cantidad de características adicionales al mismo. Justamente cuantas más funcionalides se agregan al sistema más tiempo lleva tal incorporación por lo que este enfoque ciertamente no es apto para el desarrollo de productos en el mundo ágil de desarrollo de software.
 
-Integer faucibus malesuada luctus. Vestibulum pellentesque imperdiet luctus. Fusce urna leo, faucibus vitae condimentum ut, rutrum rhoncus neque. Maecenas dignissim nisl id ultrices tincidunt. Donec consectetur in est at auctor. Ut luctus finibus lacus, sit amet consectetur purus euismod eget. Sed lacinia consequat placerat. Donec pretium orci non justo consequat dignissim.\\
 
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=1\textwidth]{Figures/Diagrama_clasico.png}
-		\rule{35em}{1pt}
-	\caption[Esquema clásico de Seguridad]{Esquema clásico de Seguridad}
-	\label{fig:Diagrama_clasico}
-\end{figure}
-
-\newpage
-%-----------------------------------
-%	SUBSECTION 1.1
-%-----------------------------------
-\subsection{Neque porro quisquam}
-Vestibulum id lacus viverra, placerat sem vitae, porta lacus. Proin semper, purus et faucibus feugiat, massa tortor lacinia ex, non dapibus enim turpis eget tortor. Duis vel purus viverra, aliquam sem consequat, efficitur nisl. Quisque elementum at nulla vitae tincidunt. Maecenas sagittis lacinia mi, quis mollis ante pulvinar eu. Mauris ut pellentesque augue. Donec non libero blandit, venenatis sem scelerisque, faucibus mi.
+Exploraremos los aspectos comunes de la utilización, implementación y configuración del framework de desarrollo Android cuyo uso no es opcional al momento de crear aplicaciones para tales dispositivos. Probablemente no tiene nada que ver en particular con la lógica de negocios principal de la aplicación o proyecto, pero es la estructura necesaria que hará que el software pueda ser ejecutado.
 
 \begin{itemize}
-\item Nullam consectetur.
-\item libero at facilisis dapibus.
+	\item Backwards compatibility
+	\item Cambios de configuración (orientación), estado de interfaz de usuario y subprocesos
+	\item Almacenamiento local, sincronización de datos con API remota
+	\item Entorno frágil (conexión a internet irregular, y otras APIs)
+	\item Uso eficiente de recursos restringidos (memoria, ancho de banda, CPU)
+	\item Interfaz de usuario atractiva, moderna y con material design  validado con el departamento de UX y que tenga buen rendimiento
+	
 \end{itemize}
 
-\subsubsection{Consectetur, adipisci}
-Nullam consectetur, libero at facilisis dapibus, libero justo semper nulla, ut mattis arcu ante non justo. Aenean ultrices convallis erat in mollis. Pellentesque eu consectetur enim. Maecenas at congue quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce egestas orci orci, non sodales nunc malesuada sed. Donec vel quam id lacus dictum ultrices. Nullam dignissim nunc vitae iaculis sodales. Etiam sed velit non dui viverra feugiat.
+Administrar las consignas anteriores no es trivial. El propio SDK tampoco es evidente, así que no debe subestimarse. Hay tantos componentes, patrones y funcionalidades, algunos de los cuales funcionan sólo con otros componentes particulares.
+
+\begin{itemize}
+	\item Actividades, servicios, receptores de difusión, proveedores de contenido, paquetes, intentos
+	\item Fragmentos, vistas, notificaciones, recursos
+	\item Bases de datos, IPC, Hilos, Almacenamiento
+	\item Miles de APIs relacionadas con servicios y características específicas de hardware de dispositivos
+	\item Librerías de soporte y externas de terceros
+	
+\end{itemize}
+
+Y toda esta complejidad está ahí, incluso antes de empezar a implementar las cosas que ésta aplicación en particular debe hacer. Así que el verdadero desafío consiste en averiguar dónde agregar el código que define lo que hace va a hacer nuestra aplicación.
+
+\begin{itemize}
+	\item Ciclo de vida, estado guardar y restaurar (Bundles, Parcelables)
+	\item Múltiples puntos de entrada (Intents, Share, Notifications deep links)
+	\item Navegación no trivial (back, up, backstack, procesos, banderas de intención)
+	\item Vistas y Fragmentos dentro y su comunicación (interfaces, callbacks, transacciones de fragmentos, inflación)
+	\item Transiciones, elementos de héroe compartidos, diseños y recursos alternativos para dispositivos, orientación, etc.
+	
+\end{itemize}
+
+Todas estas tareas implican un montón de código ya existente, que maneja un montón de asuntos de framework que nada tienen que ver con la lógica del negocio. La programación de toda la lógica de negocios mezclada con las tareas antes listadas hará que el código sea realmente ilegible, y probablemente dificultará en gran medida el  seguimiento de lo que está pasando, debido a un conjunto pequeño de clases repletas de funcionalidades no categorizadas. Necesitamos una mejor separación de responsabilidades (separation of concerns) y un conjunto de patrones comunes, lo que impondrá algún orden en nuestro código. También debe proporcionar flexibilidad suficiente, hacer que el código sea facilmente verificable y reducir la duplicación de código y todas las otras malas prácticas de desarrollo de software, que normalmente brotan cuando uno escribe código apurado para conseguir un prototipo en cuestion de semanas.

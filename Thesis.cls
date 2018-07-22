@@ -173,18 +173,18 @@
 %	defined as \examname above so you cite it as \examname
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Titulo del proyecto(modificar en Thesis.cls) } % Your thesis title - this is used in the title and abstract
+\thesistitle{Estudio, Selección e Implementación de un Patrón de Arquitectura de Software para el Desarrollo de Aplicaciones Android} % Your thesis title - this is used in the title and abstract
 %-------------------------------------------------  
-\supervisor{Ing. XXXX \textsc{YYYYYYY}} % You supervisor's name - this is used in the title page
+\supervisor{Ing. Santiago \textsc{Salamandri}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------   
 \examiner{} % Your examiner's name - this is not currently used anywhere in the template, cite it with \examname if you want it
 %-------------------------------------------------   
 \degree{Ingeniero en Computación} % Your degree name - this is currently used in the title page and abstract
 %-------------------------------------------------   
-\authors{NOMBRE \textsc{APELLIDO}} % Your name - this is used in the title page and abstract
-\authorsemail{EMAIL-AUTOR@EMAIL.com} % Your name - this is used in the title page and abstract
-\authorsmatricula{MATRICULA-AUTOR} % Your name - this is used in the title page and abstract
-\authorstelefono{TELEFONO-AUTOR} % Your name - this is used in the title page and abstract
+\authors{Esteban Andrés \textsc{Morales}} % Your name - this is used in the title page and abstract
+\authorsemail{morales.esteban.andres@gmail.com} % Your name - this is used in the title page and abstract
+\authorsmatricula{35.104.714} % Your name - this is used in the title page and abstract
+\authorstelefono{+54 0387 - 154623893} % Your name - this is used in the title page and abstract
 %-------------------------------------------------   
 \addresses{} % Your address - this is not currently used anywhere in the template, cite it with \addressnames if you want it
 %-------------------------------------------------   
@@ -209,8 +209,8 @@
                 {ESCUELA DE INGENIERÍA EN COMPUTACIÓN}}
 %-------------------------------------------------                
 \group{\texorpdfstring{\href{Research Group Web Site URL Here (include http://)} % Your research group's URL
-                {Laboratorio de FFFFFFFFFFFFFFFFFF}} % Your research group's name - this is currently used in the title page 
-                {Laboratorio de FFFFFFFFFFFFFFFFFF}}
+                {Laboratorio de Arquitectura de Redes y Computadoras.}} % Your research group's name - this is currently used in the title page 
+                {LARyC}}
 %-------------------------------------------------                
 \GROUP{\texorpdfstring{\href{Research Group Web Site URL Here (include http://)} % Your research group's URL
                 {LABORATORIO DE FFFFFFFFFFFFFFFFFF}} % Your research group's name in capitals - this is not currently used anywhere in the template, cite it with \GROUPNAME if you want it

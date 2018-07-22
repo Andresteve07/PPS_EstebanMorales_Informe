@@ -74,7 +74,7 @@
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.5\textwidth]{Figures/logo.png}
+		\includegraphics[width=0.4\textwidth]{Figures/logo.png}
 		\rule{35em}{0.5pt}
 \end{figure}
 
@@ -87,16 +87,15 @@
  
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Autor:}{\authornames}\\ % Author name - remove the \href bracket to remove the link
-\emph{Matrícula:}XXXXXXXXXXX
-\emph{Autor:}{\authornames}\\ % Author name - remove the \href bracket to remove the link
-\emph{Matrícula:}XXXXXXXXXXX
+\emph{Autor:}\\
+{\authornames}\\ % Author name - remove the \href bracket to remove the link
+\emph{Matrícula:}35.104.714
 \end{flushleft}
 \end{minipage}
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushright} \large
-\emph{Tutor Docente:} \\
-{\supname}\\ % Supervisor name - remove the \href bracket to remove the link  
+\emph{Tutor Docente:} 
+\\{Mg.Ing. Miguel \textsc{Solinas} }\\ % Supervisor name - remove the \href bracket to remove the link  
 \emph{Supervisor:} \\
 {\supname}\\~\\~\\ % Supervisor name - remove the \href bracket to remove the link  
 \end{flushright}
@@ -129,8 +128,8 @@
 \lhead{\emph{Lista de Figuras}} % Set the left side page header to "List of Figures"
 \listoffigures % Write out the List of Figures
 
-\lhead{\emph{Lista de Tablas}} % Set the left side page header to "List of Tables"
-\listoftables % Write out the List of Tables
+%\lhead{\emph{Lista de Tablas}} % Set the left side page header to "List of Tables"
+%\listoftables % Write out the List of Tables
 
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS
@@ -140,14 +139,14 @@
 
 \setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
 
-\lhead{\emph{Abreviaturas}} % Set the left side page header to "Abbreviations"
-\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
-{
-\textbf{IEEE} & \textbf{I}nstitute of \textbf{E}lectrical and \textbf{E}lectronics \textbf{E}ngineers\\
-\textbf{SO} & \textbf{S}istema \textbf{O}perativo  \\
-\textbf{KDS} & \textbf{K}inetis \textbf{D}esign \textbf{S}tudio \\
-%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
-}
+%\lhead{\emph{Abreviaturas}} % Set the left side page header to "Abbreviations"
+%\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
+%{
+%\textbf{IEEE} & \textbf{I}nstitute of \textbf{E}lectrical and \textbf{E}lectronics \textbf{E}ngineers\\
+%\textbf{SO} & \textbf{S}istema \textbf{O}perativo  \\
+%\textbf{KDS} & \textbf{K}inetis \textbf{D}esign \textbf{S}tudio \\
+%%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
+%}
 
 
 %----------------------------------------------------------------------------------------
@@ -163,10 +162,10 @@
 
 \input{Chapters/Chapter1}
 \input{Chapters/Chapter2} 
-\input{Chapters/Chapter3}
+%\input{Chapters/Chapter3}
 %\input{Chapters/Chapter4} 
 \input{Chapters/Chapter5} 
-\input{Chapters/Chapter6} 
+%\input{Chapters/Chapter6} 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
@@ -178,7 +177,7 @@
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-\input{Appendices/AppendixA}
+%\input{Appendices/AppendixA}
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 
@@ -189,4 +188,5 @@
 
 \bibliographystyle{unsrtnat}
 \bibliography{Bibliography}
+\nocite{*}
 \end{document}
