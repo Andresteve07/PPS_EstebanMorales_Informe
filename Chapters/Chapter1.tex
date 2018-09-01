@@ -52,24 +52,24 @@ Exploraremos los aspectos comunes de la utilización, implementación y configur
 	
 \end{itemize}
 
-Administrar las consignas anteriores no es trivial. El propio SDK tampoco es evidente, así que no debe subestimarse. Hay tantos componentes, patrones y funcionalidades, algunos de los cuales funcionan sólo con otros componentes particulares.
+Administrar las consignas anteriores no es trivial. El propio SDK tampoco es evidente, así que no debe subestimarse. Hay diversos componentes, patrones de interacción con el SO y funcionalidades enlatadas, algunos de los cuales operan sólo con otros componentes particulares.
 
 \begin{itemize}
-	\item Actividades, servicios, receptores de difusión, proveedores de contenido, paquetes, intentos
+	\item Actividades, servicios, receptores de difusión (Broadcast Receivers), proveedores de contenido, paquetes, intents,etc.
 	\item Fragmentos, vistas, notificaciones, recursos
 	\item Bases de datos, IPC, Hilos, Almacenamiento
-	\item Miles de APIs relacionadas con servicios y características específicas de hardware de dispositivos
-	\item Librerías de soporte y externas de terceros
+	\item Miles de APIs relacionadas con servicios y características específicas de hardware de dispositivos y periféricos
+	\item Librerías de soporte y otras de terceros comunmente usadas
 	
 \end{itemize}
 
-Y toda esta complejidad está ahí, incluso antes de empezar a implementar las cosas que ésta aplicación en particular debe hacer. Así que el verdadero desafío consiste en averiguar dónde agregar el código que define lo que hace va a hacer nuestra aplicación.
+Y toda esta complejidad está ahí, incluso antes de empezar a implementar las funcionalidades que ésta aplicación en particular debe ofrecer. Así que el verdadero desafío consiste en averiguar dónde agregar el código que define lo que va a hacer nuestra aplicación.
 
 \begin{itemize}
-	\item Ciclo de vida, estado guardar y restaurar (Bundles, Parcelables)
-	\item Múltiples puntos de entrada (Intents, Share, Notifications deep links)
-	\item Navegación no trivial (back, up, backstack, procesos, banderas de intención)
-	\item Vistas y Fragmentos dentro y su comunicación (interfaces, callbacks, transacciones de fragmentos, inflación)
+	\item Ciclo de vida, estados guardados y restaurados (Bundles, Parcelables)
+	\item Múltiples puntos de entrada (Intents, Notifications deep links)
+	\item Navegación no trivial (back, up, backstack, procesos , banderas de intención)
+	\item Vistas y Fragmentos y su intercomunicación (interfaces, callbacks, transacciones de fragmentos, inflación)
 	\item Transiciones, elementos de héroe compartidos, diseños y recursos alternativos para dispositivos, orientación, etc.
 	
 \end{itemize}
