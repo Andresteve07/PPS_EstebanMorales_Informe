@@ -29,7 +29,7 @@ Ambas implementaciones están compuestas de tres capas distintas:
 	\item Domain Layer: Esta capa contiene toda la lógica de negocio. La capa de dominio comienza con las clases denominadas casos de uso o interactores según la literatura, utilizados por los presentadores de la aplicación. Estos casos de uso representan todas las acciones posibles que un desarrollador puede realizar desde la capa de presentación. Los casos de uso se implementaron utilizando el patrón de diseño conocido como \textbf{Commander}.
 	\item Data Layer: Esta capa administra la adquisición de datos y es capaz de utilizar diferentes fuentes de datos. Esta capa se suele implementar utilizando el patrón de diseño conocido como \textbf{Repository}.  
 \end{itemize}
-\https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/
+
 \section{Presentation Layer: MVP}
 El patrón de arquitectura que se utiliza en la capa de presentación de ambas implementaciones se conoce como Modelo-Vista-Presentador.
 La idea detrás del patrón es concentrar la lógica de la interacción con el usuario en una entidad conocida como presentador, las operaciones directamente relacionadas con la manipulación de objetos gráficos y la captura de acciones de usuario están delegadas a la entidad Vista, finalmente la adquisición de datos y la ejecución de los algoritmos que encapsulan la lógica de negocio forman parte de las entidades modelo en el patrón.
@@ -45,13 +45,6 @@ El diagrama de componentes que describe la relación entre las partes principale
 
 Es posible deducir el esquema de comunicación entre los componentes a partir del diagrama. La vista se comunica de manera bidireccional con el presentador y cuando es necesario el presentador se comunica de manera unidireccional con el modelo.
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{Figures/uml_mvp_sequence.png}
-	\rule{35em}{1pt}
-	\caption[MVP Sequence]{Diagrama de secuencia para una interacción con el usuario.}
-	\label{fig:uml_mvp_sequence}
-\end{figure}
 
 Una convención para la implementación del patrón es tratar de generar vistas completamente ajenas de cualquier lógica operativa y agnósticas del estado de la aplicación. Esto las convierte en un mero instrumento de interfaz entre lo que percibe el usuario y sus reacciones. 
 
@@ -68,7 +61,7 @@ Una Actividad Android es ejecutada por el proceso principal de la aplicación. L
 	\item Modelo $\rightarrow$ Casos de Uso
 \end{itemize}
 
-El proceso de creación de los objetos y la interacción básica inicial se ilustra en la siguiente imágen:
+El proceso de creación de los objetos y la interacción básica inicial se ilustra en la siguiente diagrama:
 
 \begin{figure}[htbp]
 	\centering
@@ -146,6 +139,48 @@ Como una nota relevante de implementación se recomienda ejecutar las rutinas de
 
 
 \section{Data Layer: Repository Pattern}
-En la capa de datos se propone la implenentación de un patrón de diseño conocido como Repository(Repositorio). Este diseño intenta encapsular todas los orígenes de datos en una única interface. Para ello se define un objeto Repositorio que implementa la interfaz de orígen de datos. Así mismo otros objetos conocidos como Orígenes implementan la misma interfaz pero acceden distintas fuentes. La responsabilidad del Repositorio es determinar cual de esos orígen debe utilizarse para obtener los resultados para una determinada consulta de datos.
-Por lo tanto la entidad que realiza la consulta de datos sólo debe conocer un sólo contrato, aquél de los Orígenes.
+En la capa de datos se propone la implenentación de un patrón de diseño conocido como Repository(Repositorio). 
+Originalmente se concive a este diseño como una forma de estandarizar la implementación y el uso de los objetos DAO (Data Access Object) comunmente utilizados para mapear objetos entidad con las persistencias en la base de datos.
+Adicionalmente este patrón encapsula en la clase repositorio todos los metodos particulares de filtrado, procesamiento calculado y ordenamiento de entidades.
+Sin embargo se define una interfaz generica que deberá ser respetada por todas las implementaciones de repositorios para todo el sistema independientemente de la entidad que atienda.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Figures/uml_clases_repository.png}
+	\rule{35em}{1pt}
+	\caption[Repository Pattern Class Diagram]{Diagrama de clases del patrón Repository.}
+	\label{fig:uml_clases_repository}
+\end{figure}
+
+Como puede apreciarse en el diagrama se definen:
+\begin{itemize}
+	\item IRepositorio: es una interfaz genérica que establece el contrato básico que deben respetar todas las implementaciones de repositorios.
+	\item RepositorioImpl: es una clase generica que establece la interacción con una fuente de datos genérica.
+	\item IRepositorioEntidad: es la interfaz que \textit{Especifica} la interfaz generica de repositorio y establece el contrato o métodos particulares que deberá cumplir la implementacion concreta de repositorio para esta Entidad en particular.
+	\item RepositorioEntidadImpl: es la clase que \textit{Especifica} la implementacion generica de repositorio e implementa los métodos particulares para esta Entidad en particular.
+\end{itemize}
+
+En una descripción más detallada del diagrama puede observarse que existen dos interfaces genéricas para acceso de datos IRepository y IDataSource, esto podría generar confusión y ser de alguna forma repetitivo.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Figures/uml_clases_detalles_repository.png}
+	\rule{35em}{1pt}
+	\caption[Repository Pattern Detailed Class Diagram]{Diagrama de clases detallado del patrón Repository.}
+	\label{fig:uml_clases_detalles_repository}
+\end{figure}
+
+ Por lo antes expuesto parece razonable plantear una fusión entre el concepto de repositorio y fuente de datos. Coloquialmente es trivial ya que un repositorio definitivamente es una fuente de datos. Si además se quita la estandarización por genéricos se consigue un diseño más flexible.
+ 
+ \begin{figure}[htbp]
+ 	\centering
+ 	\includegraphics[width=0.5\textwidth]{Figures/uml_clases_modif_repository.png}
+ 	\rule{35em}{1pt}
+ 	\caption[Modified Repository Pattern Class Diagram]{Diagrama de clases del patrón Repository modificado.}
+ 	\label{fig:uml_clases_modif_repository}
+ \end{figure}
+
+Principalmente orientado a encapsular la manipulación, selección, priorización y mantenmiento de diversas fuentes u orígenes de datos, este esquema de repositorios modificado permite que el peticionario se comunique con una única interfaz para solicitar operaciones sobre datos permaneciendo agnóstico del orígen de datos sobre el cual tendrán impacto. 
+Implementar una política de caching local se convienrte en una tarea secilla de implementar y mantener.
+Esta es la implementación del patrón que se observó en los codigos estudiados.
 % 
