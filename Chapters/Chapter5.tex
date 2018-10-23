@@ -50,7 +50,7 @@ Una convención para la implementación del patrón es tratar de generar vistas 
 
 Otra de las convenciones sugiere utilizar objetos modelo-vista en la comunicación entre el presentador y la vista para estandarizar el tipo de mensaje y el proceso de actualización de la vista.
 
-En el caso de las implementaciones antes mencionadas la interface con el modelo es satisfecha mediante el uso de objetos casos de uso ó interactores, ambos términos suelen utilizarse de manera intercambiable.
+En el caso de las implementaciones antes mencionadas la interfaz con el modelo es satisfecha mediante el uso de objetos casos de uso ó interactores, ambos términos suelen utilizarse de manera intercambiable.
 
 \subsection{Mapeo con Implementaciones}
 La capa de presentación tienen una
@@ -103,7 +103,7 @@ por cada una de las operaciones soportadas por el sistema o aplicación. Sin emb
 Para mitigar este problema se suele implementar de manera adicional una modificación que permite la ejecución paramétrica de los comandos para reducir al máximo la cantidad de comandos implementados.
 Esta modificación permite diversas alternativas de implementación pero la más utilizada es incorporar conceptos del patrón Request-Response dónde el caso de uso se trata como una entidad de caja negra que admite Solicitudes y emite Respuestas estandarizadas para cada caso.
 \begin{itemize}
-	\item Solicitud (Request): Un objeto que contiene el conjunto de parametros de entrada que deben ser satisfechos para poder realizar la ejecución de la rutina del comando.
+	\item Solicitud (Request): Un objeto que contiene el conjunto de parámetros de entrada que deben ser satisfechos para poder realizar la ejecución de la rutina del comando.
 	\item Respuesta (Response): Un objeto que contiene los valores que se obtuvieron de la ejecución del algoritmo del comando.
 \end{itemize}
 
@@ -134,15 +134,15 @@ En las implementaciones estudiadas se encontraron las correspondencias como se l
 	\item Invocador $\rightarrow$ Presentador
 \end{itemize}
 
-Como una nota relevante de implementación se recomienda ejecutar las rutinas de los comandos en un hilo/proceso separado para para evitar bloquear el proceso principal de la apliación.
+Como una nota relevante de implementación se recomienda ejecutar las rutinas de los comandos en un hilo/proceso separado para para evitar bloquear el proceso principal de la aplicación.
 
 
 
 \section{Data Layer: Repository Pattern}
-En la capa de datos se propone la implenentación de un patrón de diseño conocido como Repository(Repositorio). 
-Originalmente se concive a este diseño como una forma de estandarizar la implementación y el uso de los objetos DAO (Data Access Object) comunmente utilizados para mapear objetos entidad con las persistencias en la base de datos.
-Adicionalmente este patrón encapsula en la clase repositorio todos los metodos particulares de filtrado, procesamiento calculado y ordenamiento de entidades.
-Sin embargo se define una interfaz generica que deberá ser respetada por todas las implementaciones de repositorios para todo el sistema independientemente de la entidad que atienda.
+En la capa de datos se propone la implementación de un patrón de diseño conocido como Repository(Repositorio). 
+Originalmente se concibe a este diseño como una forma de estandarizar la implementación y el uso de los objetos DAO (Data Access Object) comúnmente utilizados para mapear objetos entidad con las persistencias en la base de datos.
+Adicionalmente este patrón encapsula en la clase repositorio todos los métodos particulares de filtrado, procesamiento calculado y ordenamiento de entidades.
+Sin embargo se define una interfaz genérica que deberá ser respetada por todas las implementaciones de repositorios para todo el sistema independientemente de la entidad que atienda.
 
 \begin{figure}[htbp]
 	\centering
@@ -155,9 +155,9 @@ Sin embargo se define una interfaz generica que deberá ser respetada por todas 
 Como puede apreciarse en el diagrama se definen:
 \begin{itemize}
 	\item IRepositorio: es una interfaz genérica que establece el contrato básico que deben respetar todas las implementaciones de repositorios.
-	\item RepositorioImpl: es una clase generica que establece la interacción con una fuente de datos genérica.
-	\item IRepositorioEntidad: es la interfaz que \textit{Especifica} la interfaz generica de repositorio y establece el contrato o métodos particulares que deberá cumplir la implementacion concreta de repositorio para esta Entidad en particular.
-	\item RepositorioEntidadImpl: es la clase que \textit{Especifica} la implementacion generica de repositorio e implementa los métodos particulares para esta Entidad en particular.
+	\item RepositorioImpl: es una clase genérica que establece la interacción con una fuente de datos genérica.
+	\item IRepositorioEntidad: es la interfaz que \textit{Especifica} la interfaz genérica de repositorio y establece el contrato o métodos particulares que deberá cumplir la implementación concreta de repositorio para esta Entidad en particular.
+	\item RepositorioEntidadImpl: es la clase que \textit{Especifica} la implementación genérica de repositorio e implementa los métodos particulares para esta Entidad en particular.
 \end{itemize}
 
 En una descripción más detallada del diagrama puede observarse que existen dos interfaces genéricas para acceso de datos IRepository y IDataSource, esto podría generar confusión y ser de alguna forma repetitivo.
@@ -180,7 +180,7 @@ En una descripción más detallada del diagrama puede observarse que existen dos
  	\label{fig:uml_clases_modif_repository}
  \end{figure}
 
-Principalmente orientado a encapsular la manipulación, selección, priorización y mantenmiento de diversas fuentes u orígenes de datos, este esquema de repositorios modificado permite que el peticionario se comunique con una única interfaz para solicitar operaciones sobre datos permaneciendo agnóstico del orígen de datos sobre el cual tendrán impacto. 
-Implementar una política de caching local se convienrte en una tarea secilla de implementar y mantener.
-Esta es la implementación del patrón que se observó en los codigos estudiados.
+Principalmente orientado a encapsular la manipulación, selección, priorización y mantenimiento de diversas fuentes u orígenes de datos, este esquema de repositorios modificado permite que el peticionario se comunique con una única interfaz para solicitar operaciones sobre datos permaneciendo agnóstico del origen de datos sobre el cual tendrán impacto. 
+Implementar una política de caching local se convierte en una tarea sencilla de implementar y mantener.
+Esta es la implementación del patrón que se observó en los códigos estudiados.
 % 

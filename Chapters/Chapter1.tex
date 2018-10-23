@@ -11,9 +11,9 @@ Como primera parte de la práctica profesional se propuso el estudio y el análi
 Con esta tarea en mente se procedió a cumplir con las siguientes metas:
 
 \begin{itemize}
-	\item Entnender el concepto de patron de arquitectura de software
+	\item Entender el concepto de patrón de arquitectura de software
 	\item Entender el concepto de patrones de diseño de software.
-	\item Investigar las arquitecturas más comunmente usadas en el desarrollo de aplicaciones nativas para dispositivos móviles.
+	\item Investigar las arquitecturas más comúnmente usadas en el desarrollo de aplicaciones nativas para dispositivos móviles.
 	\item Entender los detalles de las opciones y tomar en consideración las dificultades más importantes de cada alternativa.
 	\item Elegir una opción y justificar tal elección
 	\item Introducir una posible alterativa de implementación de tal arquitectura y la correspondiente descripción de componentes.
@@ -36,8 +36,8 @@ Adicionalmente la inclusión de diseño como la inversión de control deberían 
 %----------------------------------------------------------------------------------------
 
 \section{Porqué invertir en una arquitectura sólida}
-Una de las más comunes e incorrectas prácticas en el desarrollo de software es optar por utilizar un enfoque NAIVE (ingénuo) que permite ciertamente conseguir prototipos más veloces ya que subestima el esfuerzo de la etapa de diseño al inicio del proyecto. Sin embargo este tipo de prácticas, tarde o temprano terminará mostrando síntomas de su ejecición tales como demasiados objetos omnipotentes y omnipresentes (god objects) que resultan sumamente inflexibles, al mismo tiempo el arbol de dependencias presenta un nivel de complejidad tal que hace al proyecto propenso a errores ante el más mínimo refactoreo. En fin, a pesar de la efectividad del enfoque en conseguir resultados al corto plazo, en algún momento se convertirá en un caos total y la adición de nueva funcionalidad será muy difícil requiriendo de una necesaria una refactorización importante. Por lo antes expuesto nunca debe subestimarse la complejidad de una aplicación, sobre todo cuando la etapa de especificación fue realizada con poca rigurosidad.
-En ocaciones es bastante fácil comenzar rápidamente a hackear una aplicación preexistente, pero este enfoque no escala con facilidad. La opción que suele no funcionar bien para proyectos duraderos es aquel donde primero se construye un producto mínimo viable y, a continuación, se agrega incrementalmente una gran cantidad de características adicionales al mismo. Justamente cuantas más funcionalides se agregan al sistema más tiempo lleva tal incorporación por lo que este enfoque ciertamente no es apto para el desarrollo de productos en el mundo ágil de desarrollo de software.
+Una de las más comunes e incorrectas prácticas en el desarrollo de software es optar por utilizar un enfoque NAIVE (ingenuo) que permite ciertamente conseguir prototipos más veloces ya que subestima el esfuerzo de la etapa de diseño al inicio del proyecto. Sin embargo este tipo de prácticas, tarde o temprano terminará mostrando síntomas de su ejecución tales como demasiados objetos omnipotentes y omnipresentes (god objects) que resultan sumamente inflexibles, al mismo tiempo el árbol de dependencias presenta un nivel de complejidad tal que hace al proyecto propenso a errores ante el más mínimo refactoreo. En fin, a pesar de la efectividad del enfoque en conseguir resultados al corto plazo, en algún momento se convertirá en un caos total y la adición de nueva funcionalidad será muy difícil requiriendo de una necesaria una refactorización importante. Por lo antes expuesto nunca debe subestimarse la complejidad de una aplicación, sobre todo cuando la etapa de especificación fue realizada con poca rigurosidad.
+En ocasiones es bastante fácil comenzar rápidamente a hackear una aplicación preexistente, pero este enfoque no escala con facilidad. La opción que suele no funcionar bien para proyectos duraderos es aquel donde primero se construye un producto mínimo viable y, a continuación, se agrega incrementalmente una gran cantidad de características adicionales al mismo. Justamente cuantas más funcionalidades se agregan al sistema más tiempo lleva tal incorporación por lo que este enfoque ciertamente no es apto para el desarrollo de productos en el mundo ágil de desarrollo de software.
 
 
 Exploraremos los aspectos comunes de la utilización, implementación y configuración del framework de desarrollo Android cuyo uso no es opcional al momento de crear aplicaciones para tales dispositivos. Probablemente no tiene nada que ver en particular con la lógica de negocios principal de la aplicación o proyecto, pero es la estructura necesaria que hará que el software pueda ser ejecutado.
@@ -48,18 +48,18 @@ Exploraremos los aspectos comunes de la utilización, implementación y configur
 	\item Almacenamiento local, sincronización de datos con API remota
 	\item Entorno frágil (conexión a internet irregular, y otras APIs)
 	\item Uso eficiente de recursos restringidos (memoria, ancho de banda, CPU)
-	\item Interfaz de usuario atractiva, moderna y con material design  validado con el departamento de UX y que tenga buen rendimiento
+	\item Interfaz de usuario atractiva, moderna y con Material Design  validado con el departamento de UX y que tenga buen rendimiento
 	
 \end{itemize}
 
-Administrar las consignas anteriores no es trivial. El propio SDK tampoco es evidente, así que no debe subestimarse. Hay diversos componentes, patrones de interacción con el SO y funcionalidades enlatadas, algunos de los cuales operan sólo con otros componentes particulares.
+Administrar las consignas anteriores no es trivial. El propio SDK tampoco es evidente, así que no debe subestimarse. Hay diversos componentes, patrones de interacción con el SO y funcionalidades enlatadas, algunos de los cuales operan solo con otros componentes particulares.
 
 \begin{itemize}
 	\item Actividades, servicios, receptores de difusión (Broadcast Receivers), proveedores de contenido, paquetes, intents,etc.
 	\item Fragmentos, vistas, notificaciones, recursos
 	\item Bases de datos, IPC, Hilos, Almacenamiento
 	\item Miles de APIs relacionadas con servicios y características específicas de hardware de dispositivos y periféricos
-	\item Librerías de soporte y otras de terceros comunmente usadas
+	\item Librerías de soporte y otras de terceros comúnmente usadas
 	
 \end{itemize}
 
@@ -74,4 +74,4 @@ Y toda esta complejidad está ahí, incluso antes de empezar a implementar las f
 	
 \end{itemize}
 
-Todas estas tareas implican un montón de código ya existente, que maneja un montón de asuntos de framework que nada tienen que ver con la lógica del negocio. La programación de toda la lógica de negocios mezclada con las tareas antes listadas hará que el código sea realmente ilegible, y probablemente dificultará en gran medida el  seguimiento de lo que está pasando, debido a un conjunto pequeño de clases repletas de funcionalidades no categorizadas. Necesitamos una mejor separación de responsabilidades (separation of concerns) y un conjunto de patrones comunes, lo que impondrá algún orden en nuestro código. También debe proporcionar flexibilidad suficiente, hacer que el código sea facilmente verificable y reducir la duplicación de código y todas las otras malas prácticas de desarrollo de software, que normalmente brotan cuando uno escribe código apurado para conseguir un prototipo en cuestion de semanas.
+Todas estas tareas implican un montón de código ya existente, que maneja un montón de asuntos de framework que nada tienen que ver con la lógica del negocio. La programación de toda la lógica de negocios mezclada con las tareas antes listadas hará que el código sea realmente ilegible, y probablemente dificultará en gran medida el  seguimiento de lo que está pasando, debido a un conjunto pequeño de clases repletas de funcionalidades no categorizadas. Necesitamos una mejor separación de responsabilidades (separation of concerns) y un conjunto de patrones comunes, lo que impondrá algún orden en nuestro código. También debe proporcionar flexibilidad suficiente, hacer que el código sea fácilmente verificable y reducir la duplicación de código y todas las otras malas prácticas de desarrollo de software, que normalmente brotan cuando uno escribe código apurado para conseguir un prototipo en cuestión de semanas.
